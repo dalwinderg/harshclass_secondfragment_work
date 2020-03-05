@@ -14,10 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 
 public class SecondFragment extends Fragment {
-    Button btn_go;
+
+    ImageView imgv;
+    TextView txt_pname, txt_desc , txt_type, txt_height, txt_weight, txt_ability;
+
     private NavController navController;
 
     public SecondFragment() {
@@ -31,13 +38,19 @@ public class SecondFragment extends Fragment {
 
 
         navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
-        btn_go= view.findViewById(R.id.btn_second);
-        btn_go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.firstFragment);
-            }
-        });
+
+        Pokemon_ p = getArguments().getParcelable("data");
+         imgv = view.findViewById(R.id.imageView);
+         txt_pname = view.findViewById(R.id.textView);
+         txt_desc = view.findViewById(R.id.textView2);
+         txt_type = view.findViewById(R.id.textView3);
+         txt_height = view.findViewById(R.id.textView4);
+         txt_weight = view.findViewById(R.id.textView7);
+         txt_ability = view.findViewById(R.id.textView8);
+         genView(p);
+
+
+
     }
 
     @Override
@@ -53,6 +66,18 @@ public class SecondFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+    }
+
+    public  void genView (Pokemon_ p){
+
+        Picasso.get().load(p.getImage()).into(imgv);
+        txt_pname.setText(p.getName());
+        txt_desc.setText(p.getDescription());
+        txt_type.setText("Type : "+p.getType());
+        txt_ability.setText("Ability : "+p.getAbility());
+        txt_height.setText("Height : "+p.getHeight());
+        txt_weight.setText("Weight : "+p.getWeight());
 
     }
 

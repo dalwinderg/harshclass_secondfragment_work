@@ -42,7 +42,10 @@ public RecycleAdapter(ArrayList<Pokemon_> arrypro,Context context){
         holder.pkname.setText(arrypro.get(position).getName());
 
     }
+public void setClickListener(View.OnClickListener itemlistener){
 
+    this.itemlistener = itemlistener;
+}
 
     @Override
     public int getItemCount() {
@@ -61,6 +64,7 @@ public RecycleAdapter(ArrayList<Pokemon_> arrypro,Context context){
          pkimg = itemview.findViewById(R.id.img_pk);
          pkname = itemview.findViewById(R.id.txt_pknm);
          itemview.setTag(this);
+         itemview.setOnClickListener(itemlistener);
         }
 
 
